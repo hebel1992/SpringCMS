@@ -2,7 +2,6 @@ package pl.coderslab.repository;
 
 import org.springframework.stereotype.Repository;
 import pl.coderslab.models.Author;
-import pl.coderslab.models.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

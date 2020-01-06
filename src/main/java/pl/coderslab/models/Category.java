@@ -7,8 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -16,8 +16,12 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    @Column(length = 100, nullable = false, unique = true)
+
+    @Column(name = "name", length = 100, nullable = false, unique = true)
     private String name;
+
+    @Column(name = "description")
     private String description;
 }

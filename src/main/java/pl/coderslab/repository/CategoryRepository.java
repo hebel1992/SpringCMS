@@ -13,15 +13,15 @@ public class CategoryRepository {
     @PersistenceContext
     EntityManager em;
 
-    public void save(Category category){
+    public void save(Category category) {
         em.persist(category);
     }
 
-    public void delete(Category category){
+    public void delete(Category category) {
         em.remove(em.contains(category) ? category : em.merge(category));
     }
 
-    public void update(Category category){
+    public void update(Category category) {
         em.merge(category);
     }
 }
