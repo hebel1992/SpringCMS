@@ -5,35 +5,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
-    <title>Landing Page</title>
+    <title>Category List</title>
 </head>
 <body>
-<h1>Ostatnio dodane artykuły:</h1>
+<h1>Lista kategorii:</h1>
 <table border="1">
     <thead style="font-weight: bold">
     <tr>
         <td>
-            Tytuł
+            Nazwa
         </td>
         <td>
-            Data dodania
-        </td>
-        <td>
-            ...
+            Opis
         </td>
     </tr>
     </thead>
-    <c:forEach items="${articles}" var="article">
+    <c:forEach items="${categories}" var="category">
         <tr>
-            <td>
-                    ${article.title}
-            </td>
-            <td>
-                    ${article.created}
-            </td>
-            <td>
-                    ${fn:substring(article.content, 0, 200)}
-            </td>
+            <td>${category.name}</td>
+            <td>${category.description}</td>
         </tr>
     </c:forEach>
 </table>
