@@ -14,24 +14,23 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
-@ComponentScan(basePackages = {"pl.coderslab"})
+@ComponentScan(basePackages = "pl.coderslab")
 @EnableWebMvc
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
     @Bean
-    public LocalEntityManagerFactoryBean entityManagerFactoryBean(){
+    public LocalEntityManagerFactoryBean entityManagerFactory() {
         LocalEntityManagerFactoryBean entityManagerFactoryBean
                 = new LocalEntityManagerFactoryBean();
-        entityManagerFactoryBean.setPersistenceUnitName("contentManagementSystemPersistenceUnit");
+        entityManagerFactoryBean.setPersistenceUnitName("contentManagementSystem");
         return entityManagerFactoryBean;
     }
-    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
-        JpaTransactionManager transactionManager
-                =new JpaTransactionManager(entityManagerFactory);
 
-        return transactionManager;
+    @Bean
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
+
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver =

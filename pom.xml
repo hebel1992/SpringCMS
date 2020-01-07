@@ -18,58 +18,72 @@
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-framework.version}</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.1.0.Final</version>
         </dependency>
         <dependency>
+            <scope>compile</scope>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring-framework.version}</version>
         </dependency>
         <dependency>
+            <scope>compile</scope>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.1.9.RELEASE</version>
+            <version>${spring-framework.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
+            <scope>compile</scope>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.4.4.Final</version>
         </dependency>
-
         <dependency>
+            <scope>compile</scope>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.17</version>
         </dependency>
-
         <dependency>
-            <groupId>javax.activation</groupId><artifactId>activation</artifactId>
+            <scope>compile</scope>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
             <version>1.1.1</version>
         </dependency>
         <dependency>
-            <groupId>javax.xml.bind</groupId><artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
+            <scope>compile</scope>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.xml.bind</groupId><artifactId>jaxb-core</artifactId>
-            <version>2.3.0</version>
+            <scope>compile</scope>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0.1</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.xml.bind</groupId><artifactId>jaxb-impl</artifactId>
-            <version>2.3.0</version>
+            <scope>compile</scope>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.2</version>
         </dependency>
-
+        <dependency>
+            <scope>compile</scope>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
         <dependency>
             <scope>compile</scope>
             <groupId>org.projectlombok</groupId>
@@ -77,6 +91,12 @@
             <version>1.18.10</version>
         </dependency>
 
+        <dependency>
+            <scope>compile</scope>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.1</version>
+        </dependency>
     </dependencies>
 
 </project>

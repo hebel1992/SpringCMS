@@ -5,13 +5,15 @@ import pl.coderslab.models.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
 public class CategoryRepository {
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     public void save(Category category) {
         em.persist(category);
@@ -23,6 +25,11 @@ public class CategoryRepository {
 
     public void update(Category category) {
         em.merge(category);
+    }
+
+    public List<Category> findAll() {
+        Query query = em.createQuery("SELECT c FROM Category c", Category.class);
+        return query.getResultList();
     }
 }
 

@@ -5,25 +5,33 @@ import pl.coderslab.models.Author;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
+
 
 @Repository
 @Transactional
 public class AuthorRepository {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager entityManager;
 
     public void save(Author author) {
-        em.persist(author);
+        entityManager.persist(author);
     }
 
     public void delete(Author author) {
-        em.remove(em.contains(author) ? author : em.merge(author));
+        entityManager.remove(entityManager.contains(author) ? author : entityManager.merge(author));
     }
 
     public void update(Author author) {
-        em.merge(author);
+        entityManager.merge(author);
+    }
+
+    public List<Author> findAll() {
+        Query query = entityManager.createQuery("SELECT a FROM Author a", Author.class);
+        return query.getResultList();
     }
 
 }
