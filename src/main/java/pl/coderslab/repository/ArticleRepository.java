@@ -37,4 +37,8 @@ public class ArticleRepository {
         query.setMaxResults(5);
         return query.getResultList();
     }
+
+    public Article findById(Long id) {
+        return em.find(Article.class, id);
+    }
 }

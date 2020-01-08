@@ -19,7 +19,7 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "title", length = 200)
     private String title;
@@ -28,7 +28,7 @@ public class Article {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "articles_categories", joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;

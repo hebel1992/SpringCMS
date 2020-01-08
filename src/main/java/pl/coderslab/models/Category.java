@@ -17,11 +17,16 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "name", length = 100, nullable = false, unique = true)
     private String name;
 
     @Column(name = "description")
     private String description;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

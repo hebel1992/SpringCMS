@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.models.Category;
@@ -19,7 +20,6 @@ public class CategoryController {
 
     @RequestMapping("/list")
     public String allCategories(Model model) {
-//        model.addAttribute("categories", categoryRepository.findAll());
         return "category/list";
     }
 
@@ -32,12 +32,35 @@ public class CategoryController {
     @PostMapping("/add")
     public String addCategory(@ModelAttribute Category category) {
         categoryRepository.save(category);
-        return "redirect:list";
+        return "redirect:/category/list";
     }
 
-    @RequestMapping("/edit")
-    public String editCategory() {
+    @RequestMapping("/edit/{id}")
+    public String editCategory(@PathVariable Long id, Model model) {
+        Category category = categoryRepository.findById(id);
+        model.addAttribute("category", category);
         return "/category/edit";
+    }
+
+    @PostMapping("/edit")
+    public String editCategory(@ModelAttribute Category category) {
+        categoryRepository.update(category);
+        return "redirect:/category/list";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deleteCategory(@PathVariable Long id, Model model) {
+        Category category = categoryRepository.findById(id);
+        model.addAttribute("category", category);
+        return "/category/delete";
+    }
+
+    @RequestMapping("/deleteExecute/{id}/{statement}")
+    public String deleteCategoryExecute(@PathVariable Long id, @PathVariable String statement) {
+        if (Boolean.parseBoolean(statement)) {
+            categoryRepository.delete(categoryRepository.findById(id));
+        }
+        return "redirect:/category/list";
     }
 
     @ModelAttribute("categories")

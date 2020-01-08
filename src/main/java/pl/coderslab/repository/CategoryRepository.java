@@ -27,6 +27,10 @@ public class CategoryRepository {
         em.merge(category);
     }
 
+    public Category findById(Long id) {
+        return em.find(Category.class, id);
+    }
+
     public List<Category> findAll() {
         Query query = em.createQuery("SELECT c FROM Category c", Category.class);
         return query.getResultList();

@@ -34,4 +34,8 @@ public class AuthorRepository {
         return query.getResultList();
     }
 
+    public Author findById(Long id) {
+        return entityManager.find(Author.class, id);
+    }
+
 }

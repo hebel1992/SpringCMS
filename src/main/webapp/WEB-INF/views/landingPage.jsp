@@ -37,5 +37,16 @@
         </tr>
     </c:forEach>
 </table>
+<br/>
+
+<a href="/category/list">
+    <button>Lista kategorii</button>
+</a><br/>
+<a href="/author/list">
+    <button>Lista autorów</button>
+</a><br/>
+<a href="/article/list">
+    <button>Lista artykułów</button>
+</a><br/>
 </body>
 </html>

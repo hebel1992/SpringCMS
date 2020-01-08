@@ -6,19 +6,20 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}/category"/>
 <html>
 <head>
-    <title>Add Category</title>
+    <title>Edit Category</title>
 </head>
 <body>
-<h1>Dodaj nową kategorię</h1>
+<h1>Edycja kategorii</h1>
 <%--@elvariable id="category" type="pl.coderslab.models.Category"--%>
-<form:form action="${contextPath}/add" method="post" modelAttribute="category">
-
+<form:form action="${contextPath}/edit" method="post" modelAttribute="category">
+    <form:hidden path="id"/>
     Tytuł: <form:input path="name" type="text"/><br/>
     Opis: <form:textarea path="description"/>
-    <input type="submit" value="Dodaj">
+    <input type="submit" value="Zaktualizuj">
 </form:form><br/>
 <a href="${contextPath}/list">
     <button>Wróć</button>
 </a>
 </body>
 </html>
+
