@@ -3,7 +3,7 @@
            uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}/article"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}/draft"/>
 <html>
 <style>
     .error {
@@ -11,12 +11,12 @@
     }
 </style>
 <head>
-    <title>Edit Article</title>
+    <title>Edit Draft</title>
 </head>
 <body>
-<h1>Edycja artykułu</h1>
-<%--@elvariable id="article" type="pl.coderslab.models.Article"--%>
-<form:form action="${contextPath}/edit" method="post" modelAttribute="article">
+<h1>Edycja szkicu artykułu</h1>
+<%--@elvariable id="draft" type="pl.coderslab.models.Article"--%>
+<form:form action="${contextPath}/edit" method="post" modelAttribute="draft">
     <form:hidden path="id"/>
     <div>Tytul: <form:input path="title" type="text"/>
         <form:errors path="title" cssClass="error"/>

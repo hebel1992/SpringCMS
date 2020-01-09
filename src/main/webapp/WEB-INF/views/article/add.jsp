@@ -5,6 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}/article"/>
 <html>
+<style>
+    .error {
+        color: red;
+    }
+</style>
 <head>
     <title>Add Article</title>
 </head>
@@ -13,10 +18,21 @@
 <%--@elvariable id="article" type="pl.coderslab.models.Article"--%>
 <form:form action="${contextPath}/add" method="post" modelAttribute="article">
 
-    Tytul: <form:input path="title" type="text"/><br/>
-    Treść: <form:textarea path="content"/>
-    Autor: <form:select path="author" items="${authors}" itemLabel="lastName" itemValue="id"/>
-    Kategoria: <form:select path="categories" items="${categories}" itemLabel="name" itemValue="id" multiple="true"/>
+    <div>Tytul: <form:input path="title" type="text"/>
+        <form:errors path="title" cssClass="error"/>
+    </div>
+
+    <div>Treść: <form:textarea path="content"/>
+        <form:errors path="content" cssClass="error"/>
+    </div>
+
+    <div> Autor: <form:select path="author" items="${authors}" itemLabel="lastName" itemValue="id"/></div>
+
+    <div> Kategoria: <form:select path="categories" items="${categories}" itemLabel="name" itemValue="id"
+                                  multiple="true"/>
+        <form:errors path="categories" cssClass="error"/>
+    </div>
+
     <input type="submit" value="Dodaj">
 </form:form><br/>
 <a href="${contextPath}/list">

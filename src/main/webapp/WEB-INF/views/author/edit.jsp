@@ -5,6 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}/author"/>
 <html>
+<style>
+    .error{
+        color: red;
+    }
+</style>
 <head>
     <title>Edit Author</title>
 </head>
@@ -13,8 +18,12 @@
 <%--@elvariable id="author" type="pl.coderslab.models.Author"--%>
 <form:form action="${contextPath}/edit" method="post" modelAttribute="author">
     <form:hidden path="id"/>
-    Imie: <form:input path="firstName" type="text"/><br/>
-    Nazwisko: <form:input path="lastName" type="text"/>
+
+    <div>Imie: <form:input path="firstName" type="text"/>
+        <form:errors path="firstName" cssClass="error"/></div>
+    <div>Nazwisko: <form:input path="lastName" type="text"/>
+        <form:errors path="lastName" cssClass="error"/></div>
+
     <input type="submit" value="Zaktualizuj">
 </form:form><br/>
 <a href="${contextPath}/list">

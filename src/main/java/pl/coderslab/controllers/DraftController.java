@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.ArticleValidationGroup;
+import pl.coderslab.DraftValidationGroup;
 import pl.coderslab.models.Article;
 import pl.coderslab.models.Author;
 import pl.coderslab.models.Category;
@@ -20,55 +20,55 @@ import pl.coderslab.repository.CategoryRepository;
 import java.util.List;
 
 @Controller
-@RequestMapping("/article")
 @RequiredArgsConstructor
-public class ArticleController {
+@RequestMapping("/draft")
+public class DraftController {
     private final AuthorRepository authorRepository;
     private final CategoryRepository categoryRepository;
     private final ArticleRepository articleRepository;
 
     @RequestMapping("/list")
     public String allArticles(Model model) {
-        return "article/list";
+        return "draft/list";
     }
 
     @RequestMapping("/add")
     public String addArticle(Model model) {
-        model.addAttribute("article", new Article());
-        return "article/add";
+        model.addAttribute("draft", new Article());
+        return "draft/add";
     }
 
     @PostMapping("/add")
-    public String addArticle(@ModelAttribute("article") @Validated(ArticleValidationGroup.class) Article article, BindingResult bindingResult) {
+    public String addArticle(@ModelAttribute("draft") @Validated(DraftValidationGroup.class) Article draft, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "article/add";
+            return "draft/add";
         }
-        article.setDraft(false);
-        articleRepository.save(article);
-        return "redirect:/article/list";
+        draft.setDraft(true);
+        articleRepository.save(draft);
+        return "redirect:/draft/list";
     }
 
     @RequestMapping("/edit/{id}")
     public String editArticle(@PathVariable Long id, Model model) {
-        Article article = articleRepository.findById(id);
-        model.addAttribute("article", article);
-        return "article/edit";
+        Article draft = articleRepository.findById(id);
+        model.addAttribute("draft", draft);
+        return "draft/edit";
     }
 
     @PostMapping("/edit")
-    public String editArticle(@ModelAttribute("article") @Validated(ArticleValidationGroup.class) Article article, BindingResult bindingResult) {
+    public String editArticle(@ModelAttribute("draft") @Validated(DraftValidationGroup.class) Article draft, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "article/edit";
+            return "draft/edit";
         }
-        articleRepository.update(article);
-        return "redirect:/article/list";
+        articleRepository.update(draft);
+        return "redirect:/draft/list";
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id, Model model) {
-        Article article = articleRepository.findById(id);
-        model.addAttribute("article", article);
-        return "/article/delete";
+        Article draft = articleRepository.findById(id);
+        model.addAttribute("draft", draft);
+        return "/draft/delete";
     }
 
     @RequestMapping("/deleteExecute/{id}/{statement}")
@@ -76,12 +76,12 @@ public class ArticleController {
         if (Boolean.parseBoolean(statement)) {
             articleRepository.delete(articleRepository.findById(id));
         }
-        return "redirect:/article/list";
+        return "redirect:/draft/list";
     }
 
-    @ModelAttribute("articles")
-    public List<Article> articles() {
-        return articleRepository.findLastFiveArticles();
+    @ModelAttribute("drafts")
+    public List<Article> drafts() {
+        return articleRepository.findAllDrafts();
     }
 
     @ModelAttribute("authors")

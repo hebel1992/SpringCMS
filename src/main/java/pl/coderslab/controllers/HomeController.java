@@ -20,9 +20,9 @@ public class HomeController {
         return "landingPage";
     }
 
-    @ModelAttribute
+    @ModelAttribute("articles")
     public List<Article> articles() {
-        return articleRepository.findLastFive();
+        return articleRepository.findLastFiveArticles();
     }
 
 }

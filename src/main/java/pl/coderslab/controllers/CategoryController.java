@@ -3,6 +3,7 @@ package pl.coderslab.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.models.Category;
 import pl.coderslab.repository.CategoryRepository;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/category")
@@ -30,7 +32,10 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public String addCategory(@ModelAttribute Category category) {
+    public String addCategory(@ModelAttribute("category") @Valid Category category, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/category/add";
+        }
         categoryRepository.save(category);
         return "redirect:/category/list";
     }
@@ -43,7 +48,10 @@ public class CategoryController {
     }
 
     @PostMapping("/edit")
-    public String editCategory(@ModelAttribute Category category) {
+    public String editCategory(@ModelAttribute("category") @Valid Category category, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/category/edit";
+        }
         categoryRepository.update(category);
         return "redirect:/category/list";
     }

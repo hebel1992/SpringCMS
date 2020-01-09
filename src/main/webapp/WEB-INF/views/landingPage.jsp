@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
+<style>
+    .divider {
+        margin: 10px;
+        display: block;
+    }
+</style>
 <head>
     <title>Landing Page</title>
 </head>
@@ -32,21 +38,24 @@
                     ${article.created}
             </td>
             <td>
-                    ${fn:substring(article.content, 0, 200)}
+                    ${fn:substring(article.content, 0, 200)}...
             </td>
         </tr>
     </c:forEach>
 </table>
 <br/>
 
-<a href="/category/list">
-    <button>Lista kategorii</button>
-</a><br/>
-<a href="/author/list">
-    <button>Lista autorów</button>
-</a><br/>
-<a href="/article/list">
-    <button>Lista artykułów</button>
-</a><br/>
+
+<button class="divider"><a href="/category/list">Lista kategorii</a></button>
+
+
+<button class="divider"><a href="/author/list">Lista autorów</a></button>
+
+
+<button class="divider"><a href="/article/list">Lista artykułów</a></button>
+
+
+<button class="divider"><a href="/draft/list">Szkice artykułów</a></button>
+
 </body>
 </html>

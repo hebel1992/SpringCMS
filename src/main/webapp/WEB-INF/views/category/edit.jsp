@@ -5,6 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}/category"/>
 <html>
+<style>
+    .error {
+        color: red;
+    }
+</style>
 <head>
     <title>Edit Category</title>
 </head>
@@ -13,8 +18,11 @@
 <%--@elvariable id="category" type="pl.coderslab.models.Category"--%>
 <form:form action="${contextPath}/edit" method="post" modelAttribute="category">
     <form:hidden path="id"/>
-    Tytuł: <form:input path="name" type="text"/><br/>
-    Opis: <form:textarea path="description"/>
+    <div>Tytuł: <form:input path="name" type="text"/>
+        <form:errors path="name" cssClass="error"/>
+    </div>
+
+    <div>Opis: <form:textarea path="description"/></div>
     <input type="submit" value="Zaktualizuj">
 </form:form><br/>
 <a href="${contextPath}/list">

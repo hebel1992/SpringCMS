@@ -27,13 +27,18 @@ public class ArticleRepository {
         em.merge(article);
     }
 
-    public List<Article> findAll() {
-        Query query = em.createQuery("SELECT a FROM Article a", Article.class);
+    public List<Article> findAllArticle() {
+        Query query = em.createQuery("SELECT a FROM Article a WHERE a.draft=false", Article.class);
         return query.getResultList();
     }
 
-    public List<Article> findLastFive() {
-        Query query = em.createQuery("SELECT a FROM Article a");
+    public List<Article> findAllDrafts() {
+        Query query = em.createQuery("SELECT a FROM Article a WHERE a.draft=true", Article.class);
+        return query.getResultList();
+    }
+
+    public List<Article> findLastFiveArticles() {
+        Query query = em.createQuery("SELECT a FROM Article a WHERE a.draft=false", Article.class   );
         query.setMaxResults(5);
         return query.getResultList();
     }

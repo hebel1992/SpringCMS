@@ -3,6 +3,7 @@ package pl.coderslab.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.models.Author;
 import pl.coderslab.repository.AuthorRepository;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -30,7 +32,10 @@ public class AuthorController {
     }
 
     @PostMapping("/add")
-    public String addAuthor(@ModelAttribute Author author) {
+    public String addAuthor(@ModelAttribute("author") @Valid Author author, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/author/add";
+        }
         authorRepository.save(author);
         return "redirect:/author/list";
     }
@@ -43,7 +48,10 @@ public class AuthorController {
     }
 
     @PostMapping("/edit")
-    public String editAuthor(@ModelAttribute Author author) {
+    public String editAuthor(@ModelAttribute("author") @Valid Author author, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/author/edit";
+        }
         authorRepository.update(author);
         return "redirect:/author/list";
     }
