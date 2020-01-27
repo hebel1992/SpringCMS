@@ -11,6 +11,10 @@ public class AuthorConverter implements Converter<String, Author> {
 
     @Override
     public Author convert(String id) {
-        return authorRepository.findById(Long.parseLong(id));
+        if ("".equals(id)) {
+            return null;
+        } else {
+            return authorRepository.findById(Long.parseLong(id)).get();
+        }
     }
 }

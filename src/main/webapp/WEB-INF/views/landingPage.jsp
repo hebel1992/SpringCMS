@@ -29,7 +29,7 @@
         </td>
     </tr>
     </thead>
-    <c:forEach items="${articles}" var="article">
+    <c:forEach items="${lastFiveArticles}" var="article">
         <tr>
             <td>
                     ${article.title}

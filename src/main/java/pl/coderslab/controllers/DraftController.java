@@ -50,7 +50,7 @@ public class DraftController {
 
     @RequestMapping("/edit/{id}")
     public String editArticle(@PathVariable Long id, Model model) {
-        Article draft = articleRepository.findById(id);
+        Article draft = articleRepository.findById(id).get();
         model.addAttribute("draft", draft);
         return "draft/edit";
     }
@@ -60,13 +60,14 @@ public class DraftController {
         if (bindingResult.hasErrors()) {
             return "draft/edit";
         }
-        articleRepository.update(draft);
+        draft.setDraft(true);
+        articleRepository.save(draft);
         return "redirect:/draft/list";
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id, Model model) {
-        Article draft = articleRepository.findById(id);
+        Article draft = articleRepository.findById(id).get();
         model.addAttribute("draft", draft);
         return "/draft/delete";
     }
@@ -74,7 +75,7 @@ public class DraftController {
     @RequestMapping("/deleteExecute/{id}/{statement}")
     public String deleteArticleExecute(@PathVariable Long id, @PathVariable String statement) {
         if (Boolean.parseBoolean(statement)) {
-            articleRepository.delete(articleRepository.findById(id));
+            articleRepository.delete(articleRepository.findById(id).get());
         }
         return "redirect:/draft/list";
     }

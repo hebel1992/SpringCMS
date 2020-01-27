@@ -17,24 +17,28 @@
 <h1>Dodaj nowy szkic artykułu</h1>
 <%--@elvariable id="draft" type="pl.coderslab.models.Article"--%>
 <form:form action="${contextPath}/add" method="post" modelAttribute="draft">
-
     <div>Tytul: <form:input path="title" type="text"/>
         <form:errors path="title" cssClass="error"/>
-    </div>
+    </div><br/>
 
-    <div>Treść: <form:textarea path="content"/>
+    Treść:
+    <div><form:textarea path="content" cols="100" rows="15"/>
         <form:errors path="content" cssClass="error"/>
-    </div>
+    </div><br/>
 
-    <div> Autor: <form:select path="author" items="${authors}" itemLabel="lastName" itemValue="id"/></div>
+    <div> Autor: <form:select path="author">
+        <form:option value="" label="--Please select--"/>
+        <form:options items="${authors}" itemValue="id" itemLabel="lastName"/>
+    </form:select>
+    </div><br/>
 
     <div> Kategoria: <form:select path="categories" items="${categories}" itemLabel="name" itemValue="id"
                                   multiple="true"/>
         <form:errors path="categories" cssClass="error"/>
-    </div>
+    </div><br/>
 
     <input type="submit" value="Dodaj">
-</form:form><br/>
+</form:form>
 <a href="${contextPath}/list">
     <button>Wróć</button>
 </a>

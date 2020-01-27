@@ -50,7 +50,7 @@ public class ArticleController {
 
     @RequestMapping("/edit/{id}")
     public String editArticle(@PathVariable Long id, Model model) {
-        Article article = articleRepository.findById(id);
+        Article article = articleRepository.findById(id).get();
         model.addAttribute("article", article);
         return "article/edit";
     }
@@ -60,13 +60,13 @@ public class ArticleController {
         if (bindingResult.hasErrors()) {
             return "article/edit";
         }
-        articleRepository.update(article);
+        articleRepository.save(article);
         return "redirect:/article/list";
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id, Model model) {
-        Article article = articleRepository.findById(id);
+        Article article = articleRepository.findById(id).get();
         model.addAttribute("article", article);
         return "/article/delete";
     }
@@ -74,14 +74,13 @@ public class ArticleController {
     @RequestMapping("/deleteExecute/{id}/{statement}")
     public String deleteArticleExecute(@PathVariable Long id, @PathVariable String statement) {
         if (Boolean.parseBoolean(statement)) {
-            articleRepository.delete(articleRepository.findById(id));
+            articleRepository.delete(articleRepository.findById(id).get());
         }
         return "redirect:/article/list";
     }
-
     @ModelAttribute("articles")
-    public List<Article> articles() {
-        return articleRepository.findLastFiveArticles();
+    public List<Article> getArticles() {
+        return articleRepository.findAll();
     }
 
     @ModelAttribute("authors")

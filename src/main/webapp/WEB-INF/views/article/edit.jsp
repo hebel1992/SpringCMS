@@ -18,19 +18,25 @@
 <%--@elvariable id="article" type="pl.coderslab.models.Article"--%>
 <form:form action="${contextPath}/edit" method="post" modelAttribute="article">
     <form:hidden path="id"/>
+    <form:hidden path="created"/>
     <div>Tytul: <form:input path="title" type="text"/>
         <form:errors path="title" cssClass="error"/>
-    </div>
-    <div>Treść: <form:textarea path="content"/>
+    </div><br/>
+    Treść:
+    <div><form:textarea path="content" cols="100" rows="15"/>
         <form:errors path="content" cssClass="error"/>
-    </div>
-    <div> Autor: <form:select path="author" items="${authors}" itemLabel="lastName" itemValue="id"/></div>
+    </div><br/>
+    <div> Autor: <form:select path="author">
+        <form:option value="" label="--Please select--"/>
+        <form:options items="${authors}" itemValue="id" itemLabel="lastName"/>
+    </form:select>
+    </div><br/>
     <div> Kategoria: <form:select path="categories" items="${categories}" itemLabel="name" itemValue="id"
                                   multiple="true"/>
         <form:errors path="categories" cssClass="error"/>
-    </div>
+    </div><br/>
     <input type="submit" value="Zaktualizuj">
-</form:form><br/>
+</form:form>
 <a href="${contextPath}/list">
     <button>Wróć</button>
 </a>

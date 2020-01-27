@@ -42,7 +42,7 @@ public class CategoryController {
 
     @RequestMapping("/edit/{id}")
     public String editCategory(@PathVariable Long id, Model model) {
-        Category category = categoryRepository.findById(id);
+        Category category = categoryRepository.findById(id).get();
         model.addAttribute("category", category);
         return "/category/edit";
     }
@@ -52,13 +52,13 @@ public class CategoryController {
         if (bindingResult.hasErrors()) {
             return "/category/edit";
         }
-        categoryRepository.update(category);
+        categoryRepository.save(category);
         return "redirect:/category/list";
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteCategory(@PathVariable Long id, Model model) {
-        Category category = categoryRepository.findById(id);
+        Category category = categoryRepository.findById(id).get();
         model.addAttribute("category", category);
         return "/category/delete";
     }
@@ -66,7 +66,7 @@ public class CategoryController {
     @RequestMapping("/deleteExecute/{id}/{statement}")
     public String deleteCategoryExecute(@PathVariable Long id, @PathVariable String statement) {
         if (Boolean.parseBoolean(statement)) {
-            categoryRepository.delete(categoryRepository.findById(id));
+            categoryRepository.delete(categoryRepository.findById(id).get());
         }
         return "redirect:/category/list";
     }

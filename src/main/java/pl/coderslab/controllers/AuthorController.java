@@ -42,7 +42,7 @@ public class AuthorController {
 
     @RequestMapping("/edit/{id}")
     public String editAuthor(@PathVariable Long id, Model model) {
-        Author author = authorRepository.findById(id);
+        Author author = authorRepository.findById(id).get();
         model.addAttribute("author", author);
         return "/author/edit";
     }
@@ -52,13 +52,13 @@ public class AuthorController {
         if (bindingResult.hasErrors()) {
             return "/author/edit";
         }
-        authorRepository.update(author);
+        authorRepository.save(author);
         return "redirect:/author/list";
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteAuthor(@PathVariable Long id, Model model) {
-        Author author = authorRepository.findById(id);
+        Author author = authorRepository.findById(id).get();
         model.addAttribute("author", author);
         return "/author/delete";
     }
@@ -66,7 +66,7 @@ public class AuthorController {
     @RequestMapping("/deleteExecute/{id}/{statement}")
     public String deleteAuthorExecute(@PathVariable Long id, @PathVariable String statement) {
         if (Boolean.parseBoolean(statement)) {
-            authorRepository.delete(authorRepository.findById(id));
+            authorRepository.delete(authorRepository.findById(id).get());
         }
         return "redirect:/author/list";
     }
