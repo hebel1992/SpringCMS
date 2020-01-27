@@ -3,13 +3,13 @@
            uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}/draft"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}/"/>
 <html>
 <head>
-    <title>Draft List</title>
+    <title>Article List</title>
 </head>
 <body>
-<h1>Lista szkiców artykułów:</h1>
+<h1>Lista artykułów z kategorii ${category.name}:</h1>
 <table border="1">
     <thead style="font-weight: bold">
     <tr>
@@ -36,7 +36,7 @@
         </td>
     </tr>
     </thead>
-    <c:forEach items="${drafts}" var="article">
+    <c:forEach items="${articles}" var="article">
         <tr>
             <td>${article.title}</td>
             <td>${fn:substring(article.content, 0, 200)}...</td>
@@ -51,9 +51,6 @@
     </c:forEach>
 </table>
 <br/>
-<a href="${contextPath}/add">
-    <button>Dodaj nowy</button>
-</a>
 <a href="/">
     <button>Wróć</button>
 </a>

@@ -46,16 +46,25 @@
 <br/>
 
 
-<button class="divider"><a href="/category/list">Lista kategorii</a></button>
-
-
-<button class="divider"><a href="/author/list">Lista autorów</a></button>
-
-
-<button class="divider"><a href="/article/list">Lista artykułów</a></button>
+<button class="divider"><a href="/article/list">Artykuły</a></button>
 
 
 <button class="divider"><a href="/draft/list">Szkice artykułów</a></button>
 
+
+<button class="divider"><a href="/category/list">Kategorie</a></button>
+
+
+<button class="divider"><a href="/author/list">Autorzy</a></button>
+
+
+<h4>Artykuły wg kategorii:</h4>
+<ul>
+    <c:forEach items="${categories}" var="category">
+        <li>
+            <a href="/articlesFromCategory/${category.id}">${category.name}</a>
+        </li>
+    </c:forEach>
+</ul>
 </body>
 </html>
