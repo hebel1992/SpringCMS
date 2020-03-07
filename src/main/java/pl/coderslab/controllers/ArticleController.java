@@ -28,7 +28,7 @@ public class ArticleController {
     private final ArticleRepository articleRepository;
 
     @RequestMapping("/list")
-    public String allArticles(Model model) {
+    public String allArticles() {
         return "article/list";
     }
 
@@ -78,6 +78,7 @@ public class ArticleController {
         }
         return "redirect:/article/list";
     }
+
     @ModelAttribute("articles")
     public List<Article> getArticles() {
         return articleRepository.findAll();

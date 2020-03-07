@@ -26,7 +26,7 @@ public class HomeController {
     }
 
     @RequestMapping("/articlesFromCategory/{id}")
-    public String articlesFromCategory(@PathVariable Long id, Model model){
+    public String articlesFromCategory(@PathVariable Long id, Model model) {
         Category category = categoryRepository.findById(id).get();
         List<Article> articles = articleRepository.findFromCategory(category);
         model.addAttribute("category", category);
@@ -40,7 +40,7 @@ public class HomeController {
     }
 
     @ModelAttribute("categories")
-    public List<Category> getCategories(){
+    public List<Category> getCategories() {
         return categoryRepository.findAll();
     }
 }

@@ -21,7 +21,7 @@ public class AuthorController {
     private final AuthorRepository authorRepository;
 
     @RequestMapping("/list")
-    public String allCategories(Model model) {
+    public String allCategories() {
         return "author/list";
     }
 
