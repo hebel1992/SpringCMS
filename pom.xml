@@ -44,7 +44,7 @@
             <scope>compile</scope>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.4.Final</version>
+            <version>5.4.24.Final</version>
         </dependency>
         <dependency>
             <scope>compile</scope>
